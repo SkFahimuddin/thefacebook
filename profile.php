@@ -222,12 +222,12 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_profile']) && $
                 <span class="info-label">Birthday:</span> <?php echo date('F j, Y', strtotime($profile_user['birthday'])); ?>
             </div>
             <?php endif; ?>
-            <?php if ($profile_user['relationship_status']): ?>
+            <?php if (isset($profile_user['relationship_status']) && $profile_user['relationship_status']): ?>
             <div class="info-row">
                 <span class="info-label">Relationship:</span> <?php echo htmlspecialchars($profile_user['relationship_status']); ?>
             </div>
             <?php endif; ?>
-            <?php if ($profile_user['political_views']): ?>
+            <?php if (isset($profile_user['political_views']) && $profile_user['political_views']): ?>
             <div class="info-row">
                 <span class="info-label">Political Views:</span> <?php echo htmlspecialchars($profile_user['political_views']); ?>
             </div>
@@ -245,35 +245,35 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_profile']) && $
                     <label class="info-label">Relationship Status:</label><br>
                     <select name="relationship_status">
                         <option value="">Select...</option>
-                        <option value="Single" <?php if($profile_user['relationship_status']=='Single') echo 'selected'; ?>>Single</option>
-                        <option value="In a Relationship" <?php if($profile_user['relationship_status']=='In a Relationship') echo 'selected'; ?>>In a Relationship</option>
-                        <option value="Married" <?php if($profile_user['relationship_status']=='Married') echo 'selected'; ?>>Married</option>
-                        <option value="Its Complicated" <?php if($profile_user['relationship_status']=='Its Complicated') echo 'selected'; ?>>It's Complicated</option>
+                        <option value="Single" <?php if(isset($profile_user['relationship_status']) && $profile_user['relationship_status']=='Single') echo 'selected'; ?>>Single</option>
+                        <option value="In a Relationship" <?php if(isset($profile_user['relationship_status']) && $profile_user['relationship_status']=='In a Relationship') echo 'selected'; ?>>In a Relationship</option>
+                        <option value="Married" <?php if(isset($profile_user['relationship_status']) && $profile_user['relationship_status']=='Married') echo 'selected'; ?>>Married</option>
+                        <option value="Its Complicated" <?php if(isset($profile_user['relationship_status']) && $profile_user['relationship_status']=='Its Complicated') echo 'selected'; ?>>It's Complicated</option>
                     </select>
                 </div>
                 <div class="info-row">
                     <label class="info-label">Political Views:</label><br>
-                    <input type="text" name="political_views" value="<?php echo htmlspecialchars($profile_user['political_views']); ?>">
+                    <input type="text" name="political_views" value="<?php echo htmlspecialchars($profile_user['political_views'] ?? ''); ?>">
                 </div>
                 <div class="info-row">
                     <label class="info-label">Interests:</label><br>
-                    <textarea name="interests" rows="3"><?php echo htmlspecialchars($profile_user['interests']); ?></textarea>
+                    <textarea name="interests" rows="3"><?php echo htmlspecialchars($profile_user['interests'] ?? ''); ?></textarea>
                 </div>
                 <div class="info-row">
                     <label class="info-label">Favorite Music:</label><br>
-                    <textarea name="favorite_music" rows="2"><?php echo htmlspecialchars($profile_user['favorite_music']); ?></textarea>
+                    <textarea name="favorite_music" rows="2"><?php echo htmlspecialchars($profile_user['favorite_music'] ?? ''); ?></textarea>
                 </div>
                 <div class="info-row">
                     <label class="info-label">Favorite Movies:</label><br>
-                    <textarea name="favorite_movies" rows="2"><?php echo htmlspecialchars($profile_user['favorite_movies']); ?></textarea>
+                    <textarea name="favorite_movies" rows="2"><?php echo htmlspecialchars($profile_user['favorite_movies'] ?? ''); ?></textarea>
                 </div>
                 <div class="info-row">
                     <label class="info-label">Favorite Books:</label><br>
-                    <textarea name="favorite_books" rows="2"><?php echo htmlspecialchars($profile_user['favorite_books']); ?></textarea>
+                    <textarea name="favorite_books" rows="2"><?php echo htmlspecialchars($profile_user['favorite_books'] ?? ''); ?></textarea>
                 </div>
                 <div class="info-row">
                     <label class="info-label">About Me:</label><br>
-                    <textarea name="about_me" rows="4"><?php echo htmlspecialchars($profile_user['about_me']); ?></textarea>
+                    <textarea name="about_me" rows="4"><?php echo htmlspecialchars($profile_user['about_me'] ?? ''); ?></textarea>
                 </div>
                 <input type="submit" name="update_profile" value="Save Changes" class="btn">
             </form>
@@ -281,31 +281,31 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['update_profile']) && $
         <?php else: ?>
         <div class="section">
             <h2>Personal Information</h2>
-            <?php if ($profile_user['interests']): ?>
+            <?php if (isset($profile_user['interests']) && $profile_user['interests']): ?>
             <div class="info-row">
                 <span class="info-label">Interests:</span><br>
                 <?php echo nl2br(htmlspecialchars($profile_user['interests'])); ?>
             </div>
             <?php endif; ?>
-            <?php if ($profile_user['favorite_music']): ?>
+            <?php if (isset($profile_user['favorite_music']) && $profile_user['favorite_music']): ?>
             <div class="info-row">
                 <span class="info-label">Favorite Music:</span><br>
                 <?php echo nl2br(htmlspecialchars($profile_user['favorite_music'])); ?>
             </div>
             <?php endif; ?>
-            <?php if ($profile_user['favorite_movies']): ?>
+            <?php if (isset($profile_user['favorite_movies']) && $profile_user['favorite_movies']): ?>
             <div class="info-row">
                 <span class="info-label">Favorite Movies:</span><br>
                 <?php echo nl2br(htmlspecialchars($profile_user['favorite_movies'])); ?>
             </div>
             <?php endif; ?>
-            <?php if ($profile_user['favorite_books']): ?>
+            <?php if (isset($profile_user['favorite_books']) && $profile_user['favorite_books']): ?>
             <div class="info-row">
                 <span class="info-label">Favorite Books:</span><br>
                 <?php echo nl2br(htmlspecialchars($profile_user['favorite_books'])); ?>
             </div>
             <?php endif; ?>
-            <?php if ($profile_user['about_me']): ?>
+            <?php if (isset($profile_user['about_me']) && $profile_user['about_me']): ?>
             <div class="info-row">
                 <span class="info-label">About Me:</span><br>
                 <?php echo nl2br(htmlspecialchars($profile_user['about_me'])); ?>
