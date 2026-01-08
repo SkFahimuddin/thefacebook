@@ -134,7 +134,6 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['upload_pic']) && $is_o
             background-color: #3B5998;
         }
         .header {
-            background: url('data:image/png;base64,iVBORw0KGgoAAAANSUhEUgAAAAEAAAABCAYAAAAfFcSJAAAADUlEQVR42mNk+M9QDwADhgGAWjR9awAAAABJRU5ErkJggg==') repeat;
             background-color: #3B5998;
             padding: 5px 10px;
             color: white;
