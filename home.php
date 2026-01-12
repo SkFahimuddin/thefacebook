@@ -295,12 +295,12 @@ $wall_result = mysqli_query($conn, $wall_query);
         }
         .friend-request {
             padding: 10px;
-            background-color: #fffbcc;
-            border: 1px solid #e6d96b;
+            background-color: #6d84b4;
+            border: 1px solid #162c5b;
             margin-bottom: 15px;
         }
         .friend-request a {
-            color: #3B5998;
+            color: #ffffff;
             text-decoration: none;
             font-weight: bold;
         }
@@ -340,7 +340,7 @@ $wall_result = mysqli_query($conn, $wall_query);
                 <?php while ($request = mysqli_fetch_assoc($requests_result)): ?>
                     <div class="friend-request">
                         <strong>Friend Request:</strong>
-                        <a href="profile.php?id=<?php echo $request['id']; ?>">
+                        <a href="profile.php?id=<?php echo $request['id']; ?>" style="color: black">
                             <?php echo htmlspecialchars($request['first_name'] . ' ' . $request['last_name']); ?>
                         </a>
                         wants to be your friend!
