@@ -369,6 +369,21 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['upload_pic']) && $is_o
             margin-bottom: 10px;
             font-size: 11px;
         }
+        .footer {
+            padding-top: 15px;
+            border-top: 1px solid #ddd;
+            text-align: center;
+            font-size: 10px;
+            color: #666;
+        }
+        .footer a {
+            color: #3B5998;
+            text-decoration: none;
+            margin: 0 8px;
+        }
+        .footer a:hover {
+            text-decoration: underline;
+        }
     </style>
 </head>
 <body>
@@ -677,6 +692,16 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['upload_pic']) && $is_o
                 </div>
             </div>
         </div>
+        <div class="footer">
+                    <a href="#">about</a>
+                    <a href="#">contact</a>
+                    <a href="#">faq</a>
+                    <a href="#">terms</a>
+                    <a href="#">privacy</a>
+                    <br>
+                    <div style="margin-top: 8px;">a Sk Fahimuddin production</div>
+                    <div style="margin-top: 3px;">Thefacebook © 2004</div>
+                </div>
     </div>
 </body>
 </html>
