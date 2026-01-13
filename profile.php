@@ -394,6 +394,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['upload_pic']) && $is_o
                 <a href="home.php">home</a>
                 <a href="search.php">search</a>
                 <a href="profile.php?id=<?php echo $current_user['id']; ?>">profile</a>
+                <a href="messages.php">messages</a>
                 <a href="logout.php">logout</a>
             </div>
             <div class="search-box">
@@ -413,7 +414,7 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['upload_pic']) && $is_o
                     <h3>My Profile [ edit ]</h3>
                     <a href="#info">My Friends</a>
                     <a href="#parties">My Parties</a>
-                    <a href="#messages">My Messages</a>
+                    <a href="messages.php">My Messages</a>
                     <a href="#account">My Account</a>
                     <a href="#privacy">My Privacy</a>
                 </div>
@@ -520,12 +521,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['upload_pic']) && $is_o
                     <?php endif; ?>
                 </div>
                 
+                <?php if ($friendship && $friendship['status'] == 'accepted'): ?>
                 <div class="section">
                     <div class="section-header">Send <?php echo htmlspecialchars($profile_user['first_name']); ?> a Message</div>
-                    <input type="text" placeholder="Subject" style="width: 100%; margin-bottom: 5px;">
-                    <textarea rows="3" placeholder="Message"></textarea>
-                    <button class="btn" style="margin-top: 5px;">Send</button>
+                    <form method="GET" action="compose_message.php">
+                        <input type="hidden" name="to" value="<?php echo $profile_id; ?>">
+                        <button type="submit" class="btn" style="margin-top: 5px;">Compose Message</button>
+                    </form>
                 </div>
+                <?php endif; ?>
                 <?php endif; ?>
 
                 <div class="section">
@@ -693,15 +697,15 @@ if ($_SERVER['REQUEST_METHOD'] == 'POST' && isset($_POST['upload_pic']) && $is_o
             </div>
         </div>
         <div class="footer">
-                    <a href="#">about</a>
-                    <a href="#">contact</a>
-                    <a href="#">faq</a>
-                    <a href="#">terms</a>
-                    <a href="#">privacy</a>
-                    <br>
-                    <div style="margin-top: 8px;">a Sk Fahimuddin production</div>
-                    <div style="margin-top: 3px;">Thefacebook © 2004</div>
-                </div>
+            <a href="#">about</a>
+            <a href="#">contact</a>
+            <a href="#">faq</a>
+            <a href="#">terms</a>
+            <a href="#">privacy</a>
+            <br>
+            <div style="margin-top: 8px;">a Sk Fahimuddin production</div>
+            <div style="margin-top: 3px;">Thefacebook © 2004</div>
+        </div>
     </div>
 </body>
 </html>

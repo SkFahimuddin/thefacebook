@@ -339,7 +339,7 @@ $wall_result = mysqli_query($conn, $wall_query);
                 <a href="profile.php?id=<?php echo $current_user['id']; ?>">My Profile</a>
                 <a href="search.php">My Friends</a>
                 <a href="search.php">Search</a>
-                <a href="#">Messages</a>
+                <a href="messages.php">Messages</a>
                 <a href="#">Groups</a>
                 <a href="logout.php">Logout</a>
             </div>
@@ -511,19 +511,34 @@ $wall_result = mysqli_query($conn, $wall_query);
             <div class="sidebar-section">
                 <div class="sidebar-header">Messages</div>
                 <div class="sidebar-content">
-                    <div class="message-item">
-                        <a href="#">Re: Party on Friday</a>
-                    </div>
-                    <div class="message-item">
-                        <a href="#">Meeting Tonight</a>
-                    </div>
-                    <div class="message-item">
-                        <a href="#">Class Notes</a>
-                    </div>
-                    <div class="message-item">
-                        <a href="#">Hey what's up?</a>
-                    </div>
-                    <a href="#" class="view-inbox-link">View Inbox</a>
+                    <?php
+                    // Get recent messages
+                    $recent_messages_query = "SELECT m.id, m.subject, u.first_name, u.last_name, m.is_read 
+                                              FROM messages m
+                                              INNER JOIN users u ON m.sender_id = u.id
+                                              WHERE m.receiver_id = {$current_user['id']}
+                                              ORDER BY m.sent_date DESC
+                                              LIMIT 4";
+                    $recent_messages_result = mysqli_query($conn, $recent_messages_query);
+                    
+                    if (mysqli_num_rows($recent_messages_result) > 0):
+                        while ($msg = mysqli_fetch_assoc($recent_messages_result)):
+                    ?>
+                        <div class="message-item" style="<?php echo $msg['is_read'] == 0 ? 'font-weight: bold;' : ''; ?>">
+                            <a href="view_message.php?id=<?php echo $msg['id']; ?>">
+                                <?php echo htmlspecialchars($msg['subject'] ?: 'No Subject'); ?>
+                            </a>
+                            <div style="font-size: 9px; color: #666; margin-top: 2px;">
+                                from <?php echo htmlspecialchars($msg['first_name']); ?>
+                            </div>
+                        </div>
+                    <?php 
+                        endwhile;
+                    else:
+                    ?>
+                        <div style="color: #666; font-size: 10px; padding: 5px;">No messages</div>
+                    <?php endif; ?>
+                    <a href="messages.php" class="view-inbox-link">View Inbox</a>
                 </div>
             </div>
         </div>

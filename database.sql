@@ -47,6 +47,21 @@ CREATE TABLE wall_posts (
     FOREIGN KEY (wall_owner_id) REFERENCES users(id) ON DELETE CASCADE
 );
 
+-- Messages table for the messaging system
+CREATE TABLE IF NOT EXISTS messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    sender_id INT NOT NULL,
+    receiver_id INT NOT NULL,
+    subject VARCHAR(255) DEFAULT 'No Subject',
+    message_content TEXT NOT NULL,
+    is_read BOOLEAN DEFAULT FALSE,
+    sent_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
+    FOREIGN KEY (receiver_id) REFERENCES users(id) ON DELETE CASCADE,
+    INDEX idx_receiver (receiver_id),
+    INDEX idx_sender (sender_id)
+);
+
 -- Insert sample data
 INSERT INTO users (email, password, first_name, last_name, gender, birthday) 
 VALUES 
