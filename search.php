@@ -231,7 +231,7 @@ if (isset($_GET['q']) && !empty($_GET['q'])) {
                 <a href="profile.php?id=<?php echo $current_user['id']; ?>">My Profile</a>
                 <a href="search.php">My Friends</a>
                 <a href="search.php">Search</a>
-                <a href="#">Messages</a>
+                <a href="messages.php">Messages</a>
                 <a href="#">Groups</a>
                 <a href="logout.php">Logout</a>
             </div>
