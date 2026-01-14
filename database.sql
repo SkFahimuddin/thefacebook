@@ -62,6 +62,51 @@ CREATE TABLE IF NOT EXISTS messages (
     INDEX idx_sender (sender_id)
 );
 
+-- Groups table
+CREATE TABLE IF NOT EXISTS groups (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    group_name VARCHAR(255) NOT NULL,
+    description TEXT,
+    creator_id INT NOT NULL,
+    created_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (creator_id) REFERENCES users(id) ON DELETE CASCADE
+);
+
+-- Group members table
+CREATE TABLE IF NOT EXISTS group_members (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    group_id INT NOT NULL,
+    user_id INT NOT NULL,
+    joined_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (group_id) REFERENCES groups(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    UNIQUE KEY unique_membership (group_id, user_id)
+);
+
+-- Group messages table
+CREATE TABLE IF NOT EXISTS group_messages (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    group_id INT NOT NULL,
+    sender_id INT NOT NULL,
+    message_content TEXT NOT NULL,
+    sent_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (group_id) REFERENCES groups(id) ON DELETE CASCADE,
+    FOREIGN KEY (sender_id) REFERENCES users(id) ON DELETE CASCADE,
+    INDEX idx_group (group_id),
+    INDEX idx_sender (sender_id)
+);
+
+-- Track which users have read which group messages
+CREATE TABLE IF NOT EXISTS group_message_reads (
+    id INT AUTO_INCREMENT PRIMARY KEY,
+    message_id INT NOT NULL,
+    user_id INT NOT NULL,
+    read_date TIMESTAMP DEFAULT CURRENT_TIMESTAMP,
+    FOREIGN KEY (message_id) REFERENCES group_messages(id) ON DELETE CASCADE,
+    FOREIGN KEY (user_id) REFERENCES users(id) ON DELETE CASCADE,
+    UNIQUE KEY unique_read (message_id, user_id)
+);
+
 -- Insert sample data
 INSERT INTO users (email, password, first_name, last_name, gender, birthday) 
 VALUES 
